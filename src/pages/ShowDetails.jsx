@@ -12,10 +12,13 @@ import Container from "@mui/material/Container";
 import Layout from "../components/Layout";
 import { getData } from "../Service/API";
 import { ClipLoader } from "react-spinners";
+import { useAuth } from "../context/Auth";
+import toast from "react-hot-toast";
 
 const ShowDetails = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [auth] = useAuth()
 
   const { category } = useParams();
 
@@ -37,6 +40,10 @@ const ShowDetails = () => {
   const handleMoreData = () => {
     setLoadMoreData(loadMoreData + dataPerRow);
   };
+
+  const clicked = () =>{
+    toast.error("Please Login First to See Details")
+  }
 
   const categoryData = product.filter((obj) => obj.category === category);
 
@@ -75,13 +82,28 @@ const ShowDetails = () => {
                         </Typography>
                       </CardContent>
                       <CardActions>
-                        <Button
-                          size="small"
-                          component={Link}
-                          to={`/productdetails/${element.id}`}
-                        >
-                          Product Details
-                        </Button>
+                      {!auth.user ? (
+                                <>
+                                
+                                  <Button
+                                    size="small"
+                                    component={Link}
+                                    // to={`/login`}
+                                    onClick={clicked}
+                                  >
+                                    Product Details
+                                  </Button>
+                                  
+                                </>
+                              ) : (
+                                <Button
+                                  size="small"
+                                  component={Link}
+                                  to={`/productdetails/${element.id}`}
+                                >
+                                  Product Details
+                                </Button>
+                              )}
                       </CardActions>
                     </Card>
                   </Grid>

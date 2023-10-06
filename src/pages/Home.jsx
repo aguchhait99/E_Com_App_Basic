@@ -43,6 +43,10 @@ const Home = () => {
     showCat();
   }, []);
 
+  const clicked =()=>{
+    toast.error("Please Login First to See Details")
+  }
+
   const dataPerRow = 6;
   const [loadMoreData, setLoadMoreData] = useState(dataPerRow);
   const handleMoreData = () => {
@@ -124,7 +128,8 @@ const Home = () => {
                                   <Button
                                     size="small"
                                     component={Link}
-                                    to={`/login`}
+                                    // to={`/login`}
+                                    onClick={clicked}
                                   >
                                     Product Details
                                   </Button>

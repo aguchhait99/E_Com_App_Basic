@@ -45,7 +45,7 @@ const ForgetPassword = () => {
     <>
       <Layout>
         <Container maxWidth="sm">
-          <h1 style={{ textAlign: "center" }}>Change Password</h1>\
+          <h1 style={{ textAlign: "center" }}>Change Password</h1>
           <form onSubmit={handleSubmit}>
             <FormGroup
               sx={{
